@@ -31,7 +31,8 @@ PERFIL = (
     "Fotogrametria, Teledeteccion, Geodesia, Catastro"
 )
 
-PALABRAS_CLAVE = [
+PPALABRAS_CLAVE = [
+    # Geomática y Topografía
     "topografia", "topografía",
     "geomatica", "geomática",
     "cartografia", "cartografía",
@@ -45,8 +46,27 @@ PALABRAS_CLAVE = [
     "mdt", "ortomosaico",
     "curvas de nivel",
     "igm", "igac",
-]
 
+    # Obras hidráulicas y fluviales
+    "enrocado", "enrocados",
+    "encauzamiento", "encauzar",
+    "hidraulica", "hidráulica",
+    "hidrologia", "hidrología",
+    "espigon", "espigón", "espigones",
+    "defensa fluvial", "defensas fluviales",
+    "rivera de rio", "ribera de río",
+    "cauce", "cauces",
+    "bocatoma", "bocatomas",
+    "canal", "canales",
+    "doh", "obras hidraulicas", "obras hidráulicas",
+
+    # Movimiento de tierras y obras civiles
+    "movimiento de tierra", "movimiento de tierras",
+    "excavacion", "excavación",
+    "terraplen", "terraplén",
+    "corte y relleno",
+    "subrasante", "rasante",
+]
 
 # ============================================================
 # FUNCIONES AUXILIARES
