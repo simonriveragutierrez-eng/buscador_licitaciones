@@ -141,7 +141,7 @@ def filtrar_con_ia(licitaciones):
         for intento in range(1, 4):
             try:
                 response = client.models.generate_content(
-                    model="gemini-3.8-flash",
+                    model="gemini-3.5-flash-lite",
                     contents=prompt,
                 )
 
