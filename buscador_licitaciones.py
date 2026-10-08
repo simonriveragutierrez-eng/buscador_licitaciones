@@ -31,7 +31,7 @@ PERFIL = (
     "Fotogrametria, Teledeteccion, Geodesia, Catastro"
 )
 
-PPALABRAS_CLAVE = [
+PALABRAS_CLAVE = [
     # Geomática y Topografía
     "topografia", "topografía",
     "geomatica", "geomática",
