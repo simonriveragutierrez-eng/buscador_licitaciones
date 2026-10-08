@@ -24,7 +24,7 @@ EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 EMAIL_SENDER = "simonriveragutierrez@gmail.com"
 EMAIL_RECIPIENT = "simonriveragutierrez@gmail.com"
 
-FECHA_CONSULTA = "07102025"
+FECHA_CONSULTA = time.strftime("%d%m%Y")
 
 PERFIL = (
     "Geomatica, Topografia, Cartografia, SIG, ArcGIS, Civil 3D, "
