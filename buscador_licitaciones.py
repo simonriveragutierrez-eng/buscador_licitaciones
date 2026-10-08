@@ -118,8 +118,9 @@ def enviar_correo(licitaciones):
     cuerpo += "</ul>"
     msg.attach(MIMEText(cuerpo, 'html'))
 
-    try:
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30) as server:
+        try:
+        with smtplib.SMTP('smtp.gmail.com', 587, timeout=30) as server:
+            server.starttls()
             server.login(EMAIL_SENDER, EMAIL_PASSWORD)
             server.sendmail(EMAIL_SENDER, EMAIL_RECIPIENT, msg.as_string())
         log("Correo enviado exitosamente.")
