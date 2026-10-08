@@ -149,12 +149,39 @@ def filtrar_con_ia(licitaciones):
     for lic in licitaciones:
         titulo = lic.get("Nombre", "Sin titulo")
 
-        prompt = (
-            "Actua como experto en licitaciones de ingenieria en Chile.\n"
-            "Evalua si la siguiente licitacion es relevante para una empresa "
-            "con este perfil: " + PERFIL + "\n\n"
-            "Titulo: " + titulo + "\n\n"
-            'Responde unicamente con "SI" o "NO".'
+                prompt = (
+            "Eres un experto en licitaciones publicas de ingenieria en Chile.\n"
+            "Debes decidir si la siguiente licitacion es RELEVANTE para una empresa "
+            "de GEOMATICA, TOPOGRAFIA, OBRAS HIDRAULICAS y MOVIMIENTO DE TIERRAS.\n"
+            "\n"
+            "Responde SI si la licitacion trata sobre ALGUNO de estos temas:\n"
+            "- Topografia, levantamientos topograficos, geodesia, catastro\n"
+            "- Geomatica, SIG, GIS, ArcGIS, QGIS, cartografia\n"
+            "- Fotogrametria, drones, teledeteccion, imagenes satelitales\n"
+            "- Software CAD: Autodesk, Civil 3D, AutoCAD\n"
+            "- Obras hidraulicas: canales, bocatomas, encauzamiento, cauces,\n"
+            "  riberas, defensas fluviales, espigones, enrocados\n"
+            "- Movimiento de tierras: excavacion, terraplen, corte y relleno,\n"
+            "  subrasante, rasante, movimiento masivo de suelos\n"
+            "- Conservacion o construccion de cauces, canales o riberas\n"
+            "- DOH (Direccion de Obras Hidraulicas) o similares\n"
+            "- Estudios hidrologicos o hidraulicos\n"
+            "- Construccion de obras civiles con componente topografico o de tierras\n"
+            "\n"
+            "Responde NO si la licitacion trata sobre:\n"
+            "- Salud, medicamentos, insumos medicos\n"
+            "- Alimentos, catering, cocina\n"
+            "- Uniformes, vestuario, calzado\n"
+            "- Aseo, limpieza, desratizacion\n"
+            "- Informatica generica (servidores, redes, software no CAD)\n"
+            "- Consultorias sociales, capacitaciones, eventos\n"
+            "- Vehiculos, combustibles, repuestos\n"
+            "- Solo 'levantamiento de inventario' o 'levantamiento de encuestas'\n"
+            "  (eso NO es topografia)\n"
+            "\n"
+            "Titulo de la licitacion:\n" + titulo + "\n"
+            "\n"
+            'Responde unicamente "SI" o "NO". Sin explicaciones.'
         )
 
         respuesta_ok = False
