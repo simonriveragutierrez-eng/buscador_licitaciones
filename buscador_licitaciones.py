@@ -69,7 +69,7 @@ def buscar_licitaciones():
         "?fecha=" + FECHA_CONSULTA + "&ticket=" + TICKET
     )
 
-    for intento in range(1, 4):
+    for intento in range(1, 2):
         try:
             log("Intento " + str(intento) + " - fecha " + FECHA_CONSULTA + "...")
             response = requests.get(url, timeout=30)
@@ -176,7 +176,7 @@ def filtrar_con_ia(licitaciones):
             log("  Fallaron los 3 reintentos. Se acepta por precaucion: " + titulo)
             filtradas.append(lic)
 
-        time.sleep(15)
+        time.sleep(8)
 
     return filtradas
 
