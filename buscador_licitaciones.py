@@ -15,8 +15,10 @@ EMAIL_RECIPIENT = "simonriveragutierrez@gmail.com"
 
 PERFIL = "Geomatica, Topografia, Cartografia, SIG, ArcGIS, Civil 3D, Fotogrametria, Teledeteccion"
 
+
 def log(msg):
     print("[" + time.strftime("%H:%M:%S") + "] " + msg)
+
 
 def buscar_licitaciones():
     log("Consultando API de Mercado Publico...")
@@ -35,6 +37,7 @@ def buscar_licitaciones():
     except Exception as e:
         log("ERROR: " + str(e))
         return []
+
 
 def filtrar_con_ia(licitaciones):
     log("Filtrando con Gemini...")
@@ -71,6 +74,7 @@ def filtrar_con_ia(licitaciones):
         time.sleep(13)
     return filtradas
 
+
 def enviar_correo(licitaciones):
     if not licitaciones:
         log("No hay licitaciones relevantes.")
@@ -98,6 +102,7 @@ def enviar_correo(licitaciones):
     except Exception as e:
         log("ERROR correo: " + str(e))
 
+
 def main():
     log("=== AGENTE BUSCADOR DE LICITACIONES ===")
     licitaciones = buscar_licitaciones()
@@ -106,6 +111,7 @@ def main():
         enviar_correo(relevantes)
     else:
         log("Sin licitaciones para procesar.")
+
 
 if __name__ == "__main__":
     main()
