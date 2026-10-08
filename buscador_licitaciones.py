@@ -111,7 +111,7 @@ def prefiltrar_por_palabras_clave(licitaciones):
 
 
 def filtrar_con_ia(licitaciones):
-    """Filtra con Gemini para confirmar relevancia."""
+    """Filtra con Gemini para confirmar relevancia. Reintenta si el modelo esta saturado."""
     log("Filtrando " + str(len(licitaciones)) + " candidatas con Gemini...")
 
     if not GEMINI_API_KEY or GEMINI_API_KEY == "prueba123":
@@ -137,23 +137,46 @@ def filtrar_con_ia(licitaciones):
             'Responde unicamente con "SI" o "NO".'
         )
 
-        try:
-            response = client.models.generate_content(
-                model="gemini-3.8-flash",
-                contents=prompt,
-            )
+        respuesta_ok = False
+        for intento in range(1, 4):
+            try:
+                response = client.models.generate_content(
+                    model="gemini-3.8-flash",
+                    contents=prompt,
+                )
 
-            if "SI" in texto:
-                log("  ACEPTADA: " + titulo)
-                filtradas.append(lic)
-            else:
-                log("  Descartada: " + titulo)
+                # Extraer el texto de forma segura
+                texto = ""
+                if response and hasattr(response, "text") and response.text:
+                    texto = response.text.upper()
 
-        except Exception as e:
-            log("  Error al filtrar: " + str(e))
+                if "SI" in texto:
+                    log("  ACEPTADA: " + titulo)
+                    filtradas.append(lic)
+                else:
+                    log("  Descartada: " + titulo)
+
+                respuesta_ok = True
+                break
+
+            except Exception as e:
+                error_str = str(e)
+                # Si es 503 (saturado), reintentar
+                if "503" in error_str or "UNAVAILABLE" in error_str:
+                    log("  Modelo saturado (503). Reintento " + str(intento) + "/3 en 20s...")
+                    time.sleep(20)
+                else:
+                    log("  Error al filtrar: " + error_str)
+                    # Error no recuperable: aceptar la oferta para no perderla
+                    filtradas.append(lic)
+                    respuesta_ok = True
+                    break
+
+        if not respuesta_ok:
+            log("  Fallaron los 3 reintentos. Se acepta por precaucion: " + titulo)
             filtradas.append(lic)
 
-        time.sleep(13)
+        time.sleep(15)
 
     return filtradas
 
