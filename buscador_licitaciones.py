@@ -149,7 +149,7 @@ def filtrar_con_ia(licitaciones):
     for lic in licitaciones:
         titulo = lic.get("Nombre", "Sin titulo")
 
-                prompt = (
+        prompt = (
             "Eres un experto en licitaciones publicas de ingenieria en Chile.\n"
             "Debes decidir si la siguiente licitacion es RELEVANTE para una empresa "
             "de GEOMATICA, TOPOGRAFIA, OBRAS HIDRAULICAS y MOVIMIENTO DE TIERRAS.\n"
